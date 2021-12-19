@@ -34,15 +34,16 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: [check]
+    # needs: [check]
     if: github.ref == 'refs/heads/main'
-    # Continue on error doesn't seem to work?
-    # Using || true for publishing
-    # continue-on-error: true
-    container:
-      image:  google/dart
     steps:
       - uses: actions/checkout@v2
+      - name: gh install
+        run: |
+          curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+          apt update
+          apt install gh
       - name: Setup credentials
         run: |
           mkdir -p ~/.pub-cache
