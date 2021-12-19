@@ -54,8 +54,10 @@ jobs:
         run: |
           mkdir -p ~/.pub-cache
           echo ${{ secrets.PUB_CREDENTIALS_JSON }} > ~/.pub-cache/credentials.json
-      - name: Publish the package to pub.dev
+      - name: Publish the package
         run: |
           dart pub publish --force && (gh release create v$(grep "version: " pubspec.yaml | cut -c 10-)) || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Delete credentials
         run: rm ~/.pub-cache/credentials.json
