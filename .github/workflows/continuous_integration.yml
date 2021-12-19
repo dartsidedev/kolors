@@ -34,7 +34,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    # needs: [check]
+    needs: [check]
     if: github.ref == 'refs/heads/main'
     # Continue on error doesn't seem to work?
     # Using || true for publishing
@@ -57,10 +57,8 @@ jobs:
       - name: Publish the package
         run: |
           export version=v$(grep "version: " pubspec.yaml | cut -c 10-)
-          git tag $version && git push origin $version
-          gh release create $version
+          dart pub publish --force && (git tag $version && git push origin $version && gh release create $version) || true
         env:
-          # dart pub publish --force && (gh release create v$(grep "version: " pubspec.yaml | cut -c 10-)) || true
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
       - name: Delete credentials
         run: rm ~/.pub-cache/credentials.json
