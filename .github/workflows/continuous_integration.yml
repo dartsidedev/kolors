@@ -50,10 +50,6 @@ jobs:
       # PRINT pub status
       - name: Publish the package to pub.dev
         run: |
-          dart pub publish --force && (git tag v$(grep "version: " pubspec.yaml | cut -c 10-) && git push origin v$(grep "version: " pubspec.yaml | cut -c 10-)) || true
+          dart pub publish --force && (gh release create v$(grep "version: " pubspec.yaml | cut -c 10-)) || true
       - name: Delete credentials
         run: rm ~/.pub-cache/credentials.json
-        # Write pub status to env
-        # print env value
-        # conditionally do or do not do something.
-        # try to tag the commit and push to github git tag -a v1.4 -m "my version 1.4"
