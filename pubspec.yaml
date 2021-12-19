@@ -1,6 +1,6 @@
 name: kolors
 description: The named HTML colors that you can use in your Flutter apps.
-version: 0.1.0+3
+version: 0.1.0+4
 homepage: https://www.github.com/dartsidedev/kolors
 repository: https://www.github.com/dartsidedev/kolors
 issue_tracker: https://www.github.com/dartsidedev/kolors/issues
