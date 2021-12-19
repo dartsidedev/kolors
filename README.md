@@ -31,6 +31,9 @@ const appBarColor = Kolors.tomato;
 const fabColor = KolorBlues.skyBlue;
 ```
 
+TODO: demo app gif
+TODO: demo IntelliJ
+
 You can find the example app on GitHub and on pub.dev.
 
 Please keep in mind that this package has a `dart:ui` dependency (and [therefore runs only with Flutter](https://twitter.com/vincevargadev/status/1471965783463010311)).
