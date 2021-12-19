@@ -39,8 +39,6 @@ jobs:
     # Continue on error doesn't seem to work?
     # Using || true for publishing
     # continue-on-error: true
-    env:
-      PUB_DEV_STATUS: empty
     container:
       image:  google/dart
     steps:
@@ -51,14 +49,11 @@ jobs:
           echo ${{ secrets.PUB_CREDENTIALS_JSON }} > ~/.pub-cache/credentials.json
       # PRINT pub status
       - name: Publish the package to pub.dev
-        run: dart pub publish --force && echo "success" > publish_state.txt || true && (git tag vTaggedFromGitHubActions && git push origin vTaggedFromGitHubActions)
+        run: |
+          dart pub publish --force && (git tag v$(grep "version: " pubspec.yaml | cut -c 10-) && git push origin v$(grep "version: " pubspec.yaml | cut -c 10-)) || true
       - name: Delete credentials
         run: rm ~/.pub-cache/credentials.json
         # Write pub status to env
         # print env value
         # conditionally do or do not do something.
         # try to tag the commit and push to github git tag -a v1.4 -m "my version 1.4"
-      - run: cat publish_state.txt
-      - run: echo $PUB_DEV_STATUS
-      - run: export PUB_DEV_STATUS=$(cat publish_state.txt)
-      - run: echo $PUB_DEV_STATUS
