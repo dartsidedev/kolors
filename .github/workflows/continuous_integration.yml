@@ -3,88 +3,56 @@ name: Continuous Integration
 on: [push, pull_request]
 
 jobs:
-  format:
+  check:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    container:
-      image:  google/dart
     steps:
       - uses: actions/checkout@v2
-      - name: Flutter action
-        uses: subosito/flutter-action@v1.5.3
-      - name: Ensure idiomatic Dart source code formatting
-        run: flutter format --set-exit-if-changed .
-
-  analyze:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    container:
-      image:  google/dart
-    steps:
-      - uses: actions/checkout@v2
-      - name: Ensure no analysis errors
-        run: flutter analyze --fatal-infos --fatal-warnings .
-
-  test-ubuntu:
-    runs-on: ubuntu-latest
-    timeout-minutes: 5
-    container:
-      image:  google/dart
-    steps:
-      - uses: actions/checkout@v2
-      - name: Run tests
-        run: flutter test
-
-  example-dart:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    container:
-      image:  google/dart
-    steps:
-      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
       - name: Get dependencies
         run: flutter pub get
-      - name: Verify example formatted correctly
-        working-directory: ./example
+      - name: Verify source code is formatted
         run: flutter format --set-exit-if-changed .
-      - name: Verify example has no analysis errors
-        working-directory: ./example
+      - name: Verify there are no analyzer errors
         run: flutter analyze --fatal-infos --fatal-warnings .
+      - name: Verify all tests pass
+        run: flutter test --coverage
+      - name: Verify example app builds
+        run: cd example && flutter build web
 
   publish:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs: [format, analyze, test-ubuntu, example-dart]
+    needs: [check]
     if: github.ref == 'refs/heads/main'
     # Continue on error doesn't seem to work?
     # Using || true for publishing
     # continue-on-error: true
-    container:
-      image:  google/dart
     steps:
       - uses: actions/checkout@v2
-      - name: Setup credentials
-        run: |
-          mkdir -p ~/.pub-cache
-          echo ${{ secrets.PUB_CREDENTIALS_JSON }} > ~/.pub-cache/credentials.json
-      - name: Publish the package to pub.dartlang.org
-        run: flutter pub publish --force || true
-      - name: Delete credentials
-        run: rm ~/.pub-cache/credentials.json
-
-  coverage:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    needs: publish
-    if: github.ref == 'refs/heads/main'
-    container:
-      image:  google/dart
-    steps:
-      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: 'stable'
       - name: Get the package's dependencies
         run: flutter pub get
       - name: Collect coverage
         run: flutter test --coverage
+      - name: Setup credentials
+        run: |
+          mkdir -p ~/.pub-cache
+          echo ${{ secrets.PUB_CREDENTIALS_JSON }} > ~/.pub-cache/credentials.json
+      - name: Publish the package to pub.dev
+        run: flutter pub publish --force || true
+      - name: Delete credentials
+        run: rm ~/.pub-cache/credentials.json
       - uses: codecov/codecov-action@v1.0.0
         with:
           flags: unittests
