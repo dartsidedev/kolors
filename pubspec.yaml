@@ -1,6 +1,6 @@
 name: html_colors
 description: The named HTML colors that you can use in your Flutter apps.
-version: 1.0.0
+version: 0.1.0
 environment:
   sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
