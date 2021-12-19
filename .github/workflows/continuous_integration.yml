@@ -36,6 +36,11 @@ jobs:
     timeout-minutes: 5
     # needs: [check]
     if: github.ref == 'refs/heads/main'
+    # Continue on error doesn't seem to work?
+    # Using || true for publishing
+    # continue-on-error: true
+    container:
+      image:  google/dart
     steps:
       - uses: actions/checkout@v2
       - name: gh install
