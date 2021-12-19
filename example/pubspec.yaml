@@ -1,5 +1,5 @@
 name: example
-description: An example project for demonstrating how the html_colors package works.
+description: An example project for demonstrating how the kolors package works.
 publish_to: 'none'
 version: 1.0.0+1
 environment:
@@ -8,7 +8,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  html_colors:
+  kolors:
     path: ../
 
 dev_dependencies:

@@ -1,9 +1,9 @@
 /// A simple library that contains the HTML named colors.
 ///
-/// You can access them all via the [HtmlColors] class, or via their grouped
-/// classes, such as [HtmlColorReds], [HtmlColorPinks], [HtmlColorOranges],
-/// [HtmlColorYellows], [HtmlColorPurples], [HtmlColorGreens], [HtmlColorBlues],
-/// [HtmlColorBrowns], [HtmlColorWhites], [HtmlColorGrays].
+/// You can access them all via the [Kolors] class, or via their grouped
+/// classes, such as [KolorReds], [KolorPinks], [KolorOranges],
+/// [KolorYellows], [KolorPurples], [KolorGreens], [KolorBlues],
+/// [KolorBrowns], [KolorWhites], [KolorGrays].
 ///
 /// Keep in mind that the [Color] has a Flutter dependency, so these named
 /// colors can be only used from Flutter projects.
@@ -12,7 +12,7 @@ library html_colors;
 import 'dart:ui';
 
 /// All the named HTML colors.
-abstract class HtmlColors {
+abstract class Kolors {
   static const indianRed = Color(0xFFCD5C5C);
   static const lightCoral = Color(0xFFF08080);
   static const salmon = Color(0xFFFA8072);
@@ -445,7 +445,7 @@ abstract class HtmlColors {
 
 /// Grouped colors for the different shades of Red from the supported HTML
 /// colors.
-abstract class HtmlColorReds {
+abstract class KolorReds {
   static const indianRed = Color(0xFFCD5C5C);
   static const lightCoral = Color(0xFFF08080);
   static const salmon = Color(0xFFFA8072);
@@ -482,7 +482,7 @@ abstract class HtmlColorReds {
 
 /// Grouped colors for the different shades of Pink from the supported HTML
 /// colors.
-abstract class HtmlColorPinks {
+abstract class KolorPinks {
   static const pink = Color(0xFFFFC0CB);
   static const lightPink = Color(0xFFFFB6C1);
   static const hotPink = Color(0xFFFF69B4);
@@ -510,7 +510,7 @@ abstract class HtmlColorPinks {
 
 /// Grouped colors for the different shades of Orange from the supported HTML
 /// colors.
-abstract class HtmlColorOranges {
+abstract class KolorOranges {
   static const lightSalmon = Color(0xFFFFA07A);
   static const coral = Color(0xFFFF7F50);
   static const tomato = Color(0xFFFF6347);
@@ -538,7 +538,7 @@ abstract class HtmlColorOranges {
 
 /// Grouped colors for the different shades of Yellow from the supported HTML
 /// colors.
-abstract class HtmlColorYellows {
+abstract class KolorYellows {
   static const gold = Color(0xFFFFD700);
   static const yellow = Color(0xFFFFFF00);
   static const lightYellow = Color(0xFFFFFFE0);
@@ -581,7 +581,7 @@ abstract class HtmlColorYellows {
 
 /// Grouped colors for the different shades of Purple from the supported HTML
 /// colors.
-abstract class HtmlColorPurples {
+abstract class KolorPurples {
   static const lavender = Color(0xFFE6E6FA);
   static const thistle = Color(0xFFD8BFD8);
   static const plum = Color(0xFFDDA0DD);
@@ -648,7 +648,7 @@ abstract class HtmlColorPurples {
 
 /// Grouped colors for the different shades of Green from the supported HTML
 /// colors.
-abstract class HtmlColorGreens {
+abstract class KolorGreens {
   static const greenYellow = Color(0xFFADFF2F);
   static const chartreuse = Color(0xFF7FFF00);
   static const lawnGreen = Color(0xFF7CFC00);
@@ -727,7 +727,7 @@ abstract class HtmlColorGreens {
 
 /// Grouped colors for the different shades of Blue from the supported HTML
 /// colors.
-abstract class HtmlColorBlues {
+abstract class KolorBlues {
   static const aqua = Color(0xFF00FFFF);
   static const cyan = Color(0xFF00FFFF);
   static const lightCyan = Color(0xFFE0FFFF);
@@ -812,7 +812,7 @@ abstract class HtmlColorBlues {
 
 /// Grouped colors for the different shades of Brown from the supported HTML
 /// colors.
-abstract class HtmlColorBrowns {
+abstract class KolorBrowns {
   static const cornsilk = Color(0xFFFFF8DC);
   static const blanchedAlmond = Color(0xFFFFEBCD);
   static const bisque = Color(0xFFFFE4C4);
@@ -873,7 +873,7 @@ abstract class HtmlColorBrowns {
 
 /// Grouped colors for the different shades of White from the supported HTML
 /// colors.
-abstract class HtmlColorWhites {
+abstract class KolorWhites {
   static const white = Color(0xFFFFFFFF);
   static const snow = Color(0xFFFFFAFA);
   static const honeyDew = Color(0xFFF0FFF0);
@@ -934,7 +934,7 @@ abstract class HtmlColorWhites {
 
 /// Grouped colors for the different shades of Gray from the supported HTML
 /// colors.
-abstract class HtmlColorGrays {
+abstract class KolorGrays {
   static const gainsboro = Color(0xFFDCDCDC);
   static const lightGray = Color(0xFFD3D3D3);
   static const silver = Color(0xFFC0C0C0);
