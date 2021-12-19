@@ -39,6 +39,8 @@ jobs:
     # Continue on error doesn't seem to work?
     # Using || true for publishing
     # continue-on-error: true
+    env:
+      PUB_DEV_STATUS: empty
     container:
       image:  google/dart
     steps:
@@ -47,7 +49,29 @@ jobs:
         run: |
           mkdir -p ~/.pub-cache
           echo ${{ secrets.PUB_CREDENTIALS_JSON }} > ~/.pub-cache/credentials.json
+      # PRINT pub status
       - name: Publish the package to pub.dev
-        run: dart pub publish --force || true
+        run: dart pub publish --force && echo "success" > publish_state.txt || true && echo "failure" > publish_state.txt
       - name: Delete credentials
         run: rm ~/.pub-cache/credentials.json
+        # Write pub status to env
+        # print env value
+        # conditionally do or do not do something.
+        # try to tag the commit and push to github git tag -a v1.4 -m "my version 1.4"
+      - run: cat publish_state.txt
+      - run: echo $PUB_DEV_STATUS
+      - run: export PUB_DEV_STATUS=$(cat publish_state.txt)
+      - run: echo $PUB_DEV_STATUS
+      - name: conditional step empty
+        if: ${{ env.PUB_DEV_STATUS == 'empty' }}
+        run: echo 'It was empty'
+      - name: conditional step success
+        if: ${{ env.PUB_DEV_STATUS == 'success' }}
+        run: echo 'It was success'
+      - name: conditional step empty
+        if: ${{ env.PUB_DEV_STATUS == 'failure' }}
+        run: echo 'It was failure'
+
+#      - name: conditional step!
+#        if: ${{ github.event_name == 'pull_request' && github.event.action == 'unassigned' }}
+#        run: echo This event is a pull request that had an assignee removed.
