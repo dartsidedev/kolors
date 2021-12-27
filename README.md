@@ -11,7 +11,7 @@ HTML and CSS lets you use around 140 names colors. With this simple Flutter pack
 * [Read the source code and **star the repo** on GitHub](https://github.com/dartsidedev/kolors)
 * [Open an issue on GitHub](https://github.com/dartsidedev/kolors/issues)
 * [See package on `pub.dev`](https://pub.dev/packages/kolors)
-* [Read the docs on `pub.dev`](https://pub.dev/documentation/kolors/latest/)\
+* [Read the docs on `pub.dev`](https://pub.dev/documentation/kolors/latest/)
 
 ## Inspiration
 
