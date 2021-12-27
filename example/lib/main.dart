@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('HTML Colors'),
+          title: const Text('Kolors'),
           backgroundColor: appBarColor,
         ),
         floatingActionButton: FloatingActionButton(

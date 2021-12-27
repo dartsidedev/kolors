@@ -11,29 +11,43 @@ HTML and CSS lets you use around 140 names colors. With this simple Flutter pack
 * [Read the source code and **star the repo** on GitHub](https://github.com/dartsidedev/kolors)
 * [Open an issue on GitHub](https://github.com/dartsidedev/kolors/issues)
 * [See package on `pub.dev`](https://pub.dev/packages/kolors)
-* [Read the docs on `pub.dev`](https://pub.dev/documentation/kolors/latest/)
+* [Read the docs on `pub.dev`](https://pub.dev/documentation/kolors/latest/)\
+
+## Inspiration
+
+This package is inspired by the [`material` library's `Colors`class](https://api.flutter.dev/flutter/material/Colors-class.html).
+I found that class to be very convenient for prototyping applications: no hex codes, just simple, intuitive named colors.
+
+As a developer with many years of web background, I found that I often wanted to reach for the web (HTML and CSS) colors from my Flutter application.
+
+Now, with this package, it's possible to find the right colors for quick prototyping.
 
 ## Usage
 
 ```dart
 import 'package:kolors/kolors.dart';
 
-// If you want to show the colors with their names to your users,
-// use the "asMap" that contains the colors names and the colors.
-final m = Kolors.asMap();
-final entries = m.entries.toList(growable: false);
-
 // Just type "Kolors." and pick a color that you like.
 const appBarColor = Kolors.tomato;
+const borderColor = Kolors.skyBlue;
 
 // You can use the grouped classes if you know which color's shades
 // you are interested in.
+const appBarColor = KolorReds.lightSalmon;
+const iconColor = KolorGreens.limeGreen;
 const fabColor = KolorBlues.skyBlue;
+
+// If you want to show the colors with their names to your users,
+// use the "asMap" that contains the colors names and the colors.
+final kolorsMap = Kolors.asMap();
+final kolorEntries = m.kolorsMap.toList();
+
+// Just the colors as List<Color>
+const pinks = KolorPinks.values;
 ```
 
-TODO: demo app gif
-TODO: demo IntelliJ
+You can find the example app on [GitHub](https://github.com/dartsidedev/kolors/blob/main/example/lib/main.dart) and on [pub.dev](https://pub.dev/packages/kolors/example).
 
-You can find the example app on GitHub and on pub.dev.
+<img src="https://raw.githubusercontent.com/dartsidedev/kolors/main/docs_assets/example_app.gif" alt="Flutter package kolors example app in action" height="600"/>
 
 Please keep in mind that this package has a `dart:ui` dependency (and [therefore runs only with Flutter](https://twitter.com/vincevargadev/status/1471965783463010311)).
